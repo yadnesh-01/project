@@ -14,9 +14,12 @@ const Hnavbar = () => {
       <div className="container mx-auto">
         <nav className="flex items-center justify-between p-4">
           {/* Logo */}
-          <a className="text-xl font-bold text-gray-800" href="/">
-            Restaurant Booking
-          </a>
+          <Link
+              className="text-gray-800 hover:text-gray-600 transition-colors text-2xl "
+              to="/"
+            >
+              Restaurant Booking
+            </Link>
 
           {/* Hamburger Menu Button for Small Screens */}
           <button

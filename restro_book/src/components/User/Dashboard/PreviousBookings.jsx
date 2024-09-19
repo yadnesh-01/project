@@ -45,6 +45,13 @@ const PreviousBookings = () => {
           ) : pastBookings.length > 0 ? ( */}
             <>
               <h4 className="text-xl mt-4">Your Previous Bookings:</h4>
+              <br/>
+              <Link
+                to="/Dashboard"
+                className="btn bg-blue-500 text-white px-4 py-2 rounded mb-4"
+              >
+                View Current Bookings
+              </Link>
 
               <div className="overflow-x-auto mt-4">
                 <table className="min-w-full bg-white">
@@ -57,7 +64,6 @@ const PreviousBookings = () => {
                       <th className="px-4 py-2 border">Date</th>
                       <th className="px-4 py-2 border">Time</th>
                       <th className="px-4 py-2 border">Table No.</th>
-                      <th className="px-4 py-2 border">Actions</th>
                     </tr>
                   </thead>
                   <tbody>
