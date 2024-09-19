@@ -88,7 +88,7 @@ const BookingForm = () => {
             className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700"
             required
           >
-            <option value="0">Select table number</option>
+            <option value="">Select table number</option>
             {[...Array(10).keys()].map((num) => (
               <option key={num + 1} value={num + 1}>{num + 1}</option>
             ))}

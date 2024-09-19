@@ -9,6 +9,7 @@ import Rlogin from './components/Restaurant/Login/Rlogin';
 import Hnavbar from './components/Hnavbar'; // Adjust paths as needed
 import BookingForm from './components/User/BookingForm/BookingForm';
 import Dashboard from './components/User/Dashboard/Dashboard';
+import PreviousBookings from './components/User/Dashboard/PreviousBookings';
 
 const App = () => {
   return (
@@ -22,6 +23,7 @@ const App = () => {
         <Route path="/Restaurant/Sigin" element={<Rsignin/>} />
         <Route path="/BookingForm" element={<BookingForm />} />
         <Route path="/Dashboard" element={<Dashboard />} />
+        <Route path="/PreviousBookings" element={<PreviousBookings />} />
       </Routes> 
     </Router>
   );

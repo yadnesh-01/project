@@ -8,25 +8,30 @@ const PreviousBookings = () => {
   const [username, setUsername] = useState('');
   const [contact, setContact] = useState('');
 
-  useEffect(() => {
-        // Fetch user data and bookings from the API
-    const fetchUserData = async () => {
-      try {
-        const userResponse = await axios.get('/api/user'); // Adjust this API call based on your setup
-        setUsername(userResponse.data.username);
-        setContact(userResponse.data.contact);
+//   useEffect(() => {
+//     // Fetch user data and bookings from the API
+//     const fetchUserData = async () => {
+//       try {
+//         const userResponse = await axios.get('/api/user'); // Adjust this API call based on your setup
+//         setUsername(userResponse.data.username);
+//         setContact(userResponse.data.contact);
 
-        const bookingsResponse = await axios.get('/api/bookings'); // Fetch user bookings
-        setBookings(bookingsResponse.data);
-        setLoading(false);
-      } catch (error) {
-        console.error('Error fetching data', error);
-        setLoading(false);
-      }
-    };
+//         const bookingsResponse = await axios.get('/api/bookings'); // Fetch user bookings
+//         setBookings(bookingsResponse.data);
+//         setLoading(false);
+//       } catch (error) {
+//         console.error('Error fetching data', error);
+//         setLoading(false);
+//       }
+//     };
 
-    fetchUserData();
-  }, []);
+//     fetchUserData();
+//   }, []);
+
+  const currentDate = new Date();
+
+  // Filter out only past bookings
+  const pastBookings = bookings.filter((booking) => new Date(booking.res_date) < currentDate);
 
   return (
     <div className="py-5">
@@ -35,14 +40,11 @@ const PreviousBookings = () => {
           <h3 className="text-2xl font-bold">Welcome, {username}!</h3>
           <p className="text-lg text-gray-600">Contact: {contact}</p>
 
-          {loading ? (
-            <p>Loading your bookings...</p>
-          ) : bookings.length > 0 ? (
+          {/* {loading ? (
+            <p>Loading your previous bookings...</p>
+          ) : pastBookings.length > 0 ? ( */}
             <>
-              <h4 className="text-xl mt-4">Your Bookings:</h4>
-              <Link to="/previous_reservations" className="btn bg-blue-500 text-white px-4 py-2 rounded">
-                Previous Bookings
-              </Link>
+              <h4 className="text-xl mt-4">Your Previous Bookings:</h4>
 
               <div className="overflow-x-auto mt-4">
                 <table className="min-w-full bg-white">
@@ -59,30 +61,24 @@ const PreviousBookings = () => {
                     </tr>
                   </thead>
                   <tbody>
-                    {bookings.map((booking) => {
-                      const currentDate = new Date();
-                      const bookingDate = new Date(booking.res_date);
-
-                      // Only render bookings that are in the past
-                      return bookingDate <= currentDate ? (
-                        <tr key={booking.id}>
-                          <td className="px-4 py-2 border">{booking.id}</td>
-                          <td className="px-4 py-2 border">{booking.rname}</td>
-                          <td className="px-4 py-2 border">{booking.rcontact}</td>
-                          <td className="px-4 py-2 border">{booking.radd}</td>
-                          <td className="px-4 py-2 border">{booking.res_date}</td>
-                          <td className="px-4 py-2 border">{booking.res_time}</td>
-                          <td className="px-4 py-2 border">{booking.tab_no}</td>
-                        </tr>
-                      ) : null;
-                    })}
+                    {pastBookings.map((booking) => (
+                      <tr key={booking.id}>
+                        <td className="px-4 py-2 border">{booking.id}</td>
+                        <td className="px-4 py-2 border">{booking.rname}</td>
+                        <td className="px-4 py-2 border">{booking.rcontact}</td>
+                        <td className="px-4 py-2 border">{booking.radd}</td>
+                        <td className="px-4 py-2 border">{booking.res_date}</td>
+                        <td className="px-4 py-2 border">{booking.res_time}</td>
+                        <td className="px-4 py-2 border">{booking.tab_no}</td>
+                      </tr>
+                    ))}
                   </tbody>
                 </table>
               </div>
             </>
-          ) : (
-            <p>You have no bookings yet.</p>
-          )}
+          {/* ) : (
+            <p>You have no previous bookings.</p>
+          )} */}
         </div>
       </div>
     </div>
