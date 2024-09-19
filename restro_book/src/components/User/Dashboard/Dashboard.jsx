@@ -1,4 +1,3 @@
-// src/components/Dashboard.js
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import { Link } from 'react-router-dom';
@@ -9,36 +8,38 @@ const Dashboard = () => {
   const [username, setUsername] = useState('');
   const [contact, setContact] = useState('');
 
-  useEffect(() => {
-    // Fetch user data and bookings from the API
-    const fetchUserData = async () => {
-      try {
-        const userResponse = await axios.get('/api/user'); // Adjust this API call based on your setup
-        setUsername(userResponse.data.username);
-        setContact(userResponse.data.contact);
+  // useEffect(() => {
+  //   // Fetch user data and bookings from the API
+  //   const fetchUserData = async () => {
+  //     try {
+  //       const userResponse = await axios.get('/api/user'); // Adjust this API call based on your setup
+  //       setUsername(userResponse.data.username);
+  //       setContact(userResponse.data.contact);
 
-        const bookingsResponse = await axios.get('/api/bookings'); // Fetch user bookings
-        setBookings(bookingsResponse.data);
-        setLoading(false);
-      } catch (error) {
-        console.error('Error fetching data', error);
-        setLoading(false);
-      }
-    };
+  //       const bookingsResponse = await axios.get('/api/bookings'); // Fetch user bookings
+  //       setBookings(bookingsResponse.data);
+  //       setLoading(false);
+  //     } catch (error) {
+  //       console.error('Error fetching data', error);
+  //       setLoading(false);
+  //     }
+  //   };
 
-    fetchUserData();
-  }, []);
+  //   fetchUserData();
+  // }, []);
 
-  const deleteBooking = async (id) => {
-    if (window.confirm('Are you sure you want to delete this reservation?')) {
-      try {
-        await axios.delete(`/api/reservations/${id}`);
-        setBookings(bookings.filter((booking) => booking.id !== id));
-      } catch (error) {
-        console.error('Error deleting reservation', error);
-      }
-    }
-  };
+  // const deleteBooking = async (id) => {
+  //   if (window.confirm('Are you sure you want to delete this reservation?')) {
+  //     try {
+  //       await axios.delete(`/api/reservations/${id}`);
+  //       setBookings(bookings.filter((booking) => booking.id !== id));
+  //     } catch (error) {
+  //       console.error('Error deleting reservation', error);
+  //     }
+  //   }
+  // };
+
+  const currentDate = new Date();
 
   return (
     <div className="py-5">
@@ -47,13 +48,18 @@ const Dashboard = () => {
           <h3 className="text-2xl font-bold">Welcome, {username}!</h3>
           <p className="text-lg text-gray-600">Contact: {contact}</p>
 
-          {loading ? (
+          {/* {loading ? (
             <p>Loading your bookings...</p>
-          ) : bookings.length > 0 ? (
+          ) : bookings.length > 0 ? ( */}
             <>
-              <h4 className="text-xl mt-4">Your Bookings:</h4>
-              <Link to="/previous_reservations" className="btn bg-blue-500 text-white px-4 py-2 rounded">
-                Previous Bookings
+              <h4 className="text-xl mt-4">Your Upcoming Bookings:</h4>
+              <br />
+
+              <Link
+                to="/PreviousBookings.jsx"
+                className="btn bg-blue-500 text-white px-4 py-2 rounded mb-4"
+              >
+                View Previous Bookings
               </Link>
 
               <div className="overflow-x-auto mt-4">
@@ -71,11 +77,9 @@ const Dashboard = () => {
                     </tr>
                   </thead>
                   <tbody>
-                    {bookings.map((booking) => {
-                      const currentDate = new Date();
-                      const bookingDate = new Date(booking.res_date);
-
-                      return (
+                    {bookings
+                      .filter((booking) => new Date(booking.res_date) >= currentDate) // Only show upcoming or today's bookings
+                      .map((booking) => (
                         <tr key={booking.id}>
                           <td className="px-4 py-2 border">{booking.id}</td>
                           <td className="px-4 py-2 border">{booking.rname}</td>
@@ -85,32 +89,29 @@ const Dashboard = () => {
                           <td className="px-4 py-2 border">{booking.res_time}</td>
                           <td className="px-4 py-2 border">{booking.tab_no}</td>
                           <td className="px-4 py-2 border flex space-x-2">
-                            {bookingDate >= currentDate ? (
-                              <>
-                                <Link to={`/update_reservation/${booking.id}`} className="btn bg-blue-500 text-white px-4 py-2 rounded">
-                                  Update
-                                </Link>
-                                <button
-                                  onClick={() => deleteBooking(booking.id)}
-                                  className="btn bg-red-500 text-white px-4 py-2 rounded"
-                                >
-                                  Delete
-                                </button>
-                              </>
-                            ) : (
-                              <p className="text-gray-500">No actions available</p>
-                            )}
+                            <Link
+                              to={`/update_reservation/${booking.id}`}
+                              className="btn bg-blue-500 text-white px-4 py-2 rounded"
+                            >
+                              Update
+                            </Link>
+                            <button
+                              onClick={() => deleteBooking(booking.id)}
+                              className="btn bg-red-500 text-white px-4 py-2 rounded"
+                            >
+                              Delete
+                            </button>
                           </td>
                         </tr>
-                      );
-                    })}
+                      ))}
                   </tbody>
                 </table>
               </div>
             </>
-          ) : (
-            <p>You have no bookings yet.</p>
-          )}
+           {/* )
+           : (
+            <p>You have no upcoming bookings.</p>
+          )} */}
         </div>
       </div>
     </div>
