@@ -1,6 +1,6 @@
 import { Link } from "react-router-dom";
 
-export default function UlogIn() {
+export default function Rlogin() {
     return (
       <>
       <div className="py-5">
@@ -9,7 +9,7 @@ export default function UlogIn() {
           <div className="w-full max-w-md">
             <div className="shadow-lg rounded-lg">
               <div className="bg-gray-100 p-4 rounded-t-lg">
-                <h3 className="text-lg font-bold text-center">User Login Form</h3>
+                <h3 className="text-lg font-bold text-center">Restaurant Login Form</h3>
               </div>
   
           <div className="mt-10 sm:mx-auto sm:w-full sm:max-w-sm">
@@ -66,7 +66,7 @@ export default function UlogIn() {
               Not a member?{' '}
               <Link
               className="font-semibold leading-6 text-indigo-600 hover:text-indigo-500"
-              to="../Sigin">
+              to="../../Restaurant/Sigin">
                 Create New Account
               </Link>
             </p>
