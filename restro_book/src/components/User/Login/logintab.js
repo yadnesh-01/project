@@ -3,7 +3,7 @@ const mysql = require('mysql2');
 const session = require('express-session');
 const bcrypt = require('bcryptjs');
 const app = express();
-const port = 3306;
+const port = 8081;
 
 // Create a MySQL connection pool
 const pool = mysql.createPool({

@@ -24,7 +24,7 @@ const UsignIn = () => {
 
     try {
       // Send the data to the backend
-      const response = await axios.post('http://localhost:3306/api/register', formData);
+      const response = await axios.post('http://localhost:8081/api/register', formData);
       
       // Handle success response
       if (response.status === 201) {
