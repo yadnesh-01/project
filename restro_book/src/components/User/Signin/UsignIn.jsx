@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
-
+import axios from 'axios';  // Make sure to install axios: npm install axios
 
 const UsignIn = () => {
   const [formData, setFormData] = useState({
@@ -19,10 +19,21 @@ const UsignIn = () => {
     });
   };
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
-    // Add form validation and submission logic here
-    console.log(formData);
+
+    try {
+      // Send the data to the backend
+      const response = await axios.post('http://localhost:3306/api/register', formData);
+      
+      // Handle success response
+      if (response.status === 201) {
+        alert('Registration successful!');
+      }
+    } catch (error) {
+      // Handle error response
+      alert(error.response?.data?.error || 'Something went wrong!');
+    }
   };
 
   return (
@@ -36,6 +47,7 @@ const UsignIn = () => {
               </div>
               <div className="p-6 bg-white rounded-b-lg">
                 <form onSubmit={handleSubmit}>
+                  {/* Your form fields */}
                   <div className="mb-4">
                     <label htmlFor="username" className="block text-sm font-medium text-gray-700">
                       Name
@@ -43,10 +55,10 @@ const UsignIn = () => {
                     <input
                       type="text"
                       name="username"
-                      className="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
                       required
                       value={formData.username}
                       onChange={handleChange}
+                      className="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
                     />
                   </div>
 
@@ -131,9 +143,7 @@ const UsignIn = () => {
                 </form>
                 <p className="mt-4 text-center text-sm text-gray-600">
                   Already have an account?{' '}
-                  <Link 
-                  className="text-indigo-600 font-semibold hover:text-indigo-500"
-                  to="../Login">
+                  <Link className="text-indigo-600 font-semibold hover:text-indigo-500" to="../Login">
                     Login Here
                   </Link>
                 </p>

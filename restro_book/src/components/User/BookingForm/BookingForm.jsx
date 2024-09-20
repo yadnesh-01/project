@@ -105,7 +105,7 @@ const BookingForm = () => {
         </div>
       </form>
 
-      <h4 className="mt-8 mb-4 text-lg text-left">Refer to the table below for seating capacity:</h4>
+      <h4 className="mt-8 mb-4 ml-1 text-lg text-left">Refer to the table below for seating capacity:</h4>
       <table className="table-auto border-collapse border border-gray-400  ">
         <thead>
           <tr>

@@ -50,7 +50,7 @@ const Home = () => {
       </section>
 
       {/* Blog Section */}
-      <section id="blog" className="py-10">
+      <section id="blog" className="py-10 px-1">
         <div className="container mx-auto">
           <h3 className="text-xl font-bold mb-6">News and Articles</h3>
           <div className="space-y-6">

@@ -1,0 +1,10 @@
+{
+    "configurations": [
+        {
+            "type": "msedge",
+            "name": "http://localhost/project/dist",
+            "request": "launch",
+            "url": "http://localhost/project/dist"
+        }
+    ]
+}
