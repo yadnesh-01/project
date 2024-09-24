@@ -57,7 +57,8 @@ router.get('/user', (req, res) => {
   const { username, cont } = req.session.user;
 
   // Query to fetch bookings for the authenticated user
-  const bookingsSql = 'SELECT * FROM reservations WHERE uname = ?'; // Assuming 'uname' is the user identifier
+  const bookingsSql = 'SELECT r.id, ri.rname, ri.rcontact, ri.radd, r.res_date, r.res_time, r.tab_no FROM restinfo ri JOIN reservations r ON ri.rname = r.rname WHERE r.username = ? ORDER BY r.res_date ASC, r.res_time ASC';
+   // Assuming 'uname' is the user identifier
   db.query(bookingsSql, [req.session.user.uname], (err, bookings) => {
     if (err) {
       return res.status(500).json({ error: 'Database error' });

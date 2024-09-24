@@ -2,13 +2,15 @@
 
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 
 const Dashboard = () => {
   const [bookings, setBookings] = useState([]);
   const [loading, setLoading] = useState(true);
   const [username, setUsername] = useState('');
   const [contact, setContact] = useState('');
+  const Navigate = useNavigate();
+  const [isAuthenticated, setIsAuthenticated] = useState(false); // Define isAuthenticated here
 
   useEffect(() => {
     const fetchUserData = async () => {
@@ -18,6 +20,7 @@ const Dashboard = () => {
         setContact(userResponse.data.cont);
         setBookings(userResponse.data.bookings);
         setLoading(false);
+        setIsAuthenticated(true); // Set isAuthenticated to true
       } catch (error) {
         console.error('Error fetching data', error);
         setLoading(false);
@@ -39,6 +42,10 @@ const Dashboard = () => {
   };
 
   const currentDate = new Date();
+
+  if (!isAuthenticated) {
+    return<> <Navigate to="/Login" /></>; // Redirect to login if not authenticated
+  }
 
   return (
     <div className="py-5">

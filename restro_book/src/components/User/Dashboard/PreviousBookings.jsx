@@ -7,26 +7,25 @@ const PreviousBookings = () => {
   const [loading, setLoading] = useState(true);
   const [username, setUsername] = useState('');
   const [contact, setContact] = useState('');
+  const [setIsAuthenticated] = useState(false); // Define isAuthenticated here
 
-//   useEffect(() => {
-//     // Fetch user data and bookings from the API
-//     const fetchUserData = async () => {
-//       try {
-//         const userResponse = await axios.get('/api/user'); // Adjust this API call based on your setup
-//         setUsername(userResponse.data.username);
-//         setContact(userResponse.data.contact);
-
-//         const bookingsResponse = await axios.get('/api/bookings'); // Fetch user bookings
-//         setBookings(bookingsResponse.data);
-//         setLoading(false);
-//       } catch (error) {
-//         console.error('Error fetching data', error);
-//         setLoading(false);
-//       }
-//     };
-
-//     fetchUserData();
-//   }, []);
+  useEffect(() => {
+    const fetchUserData = async () => {
+      try {
+        const userResponse = await axios.get('http://localhost:8081/api/auth/user', { withCredentials: true });
+        setUsername(userResponse.data.username);
+        setContact(userResponse.data.cont);
+        setBookings(userResponse.data.bookings);
+        setLoading(false);
+        setIsAuthenticated(true); // Set isAuthenticated to true
+      } catch (error) {
+        console.error('Error fetching data', error);
+        setLoading(false);
+      }
+    };
+    
+    fetchUserData();
+  }, []);
 
   const currentDate = new Date();
 

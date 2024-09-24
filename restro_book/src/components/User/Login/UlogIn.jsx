@@ -1,10 +1,10 @@
 import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 
-export default function UlogIn() {
+export default function UlogIn({ setIsAuthenticated }) {
   const [uname, setUname] = useState('');
   const [password, setPassword] = useState('');
-  const navigate = useNavigate(); // Initialize useNavigate
+  const navigate = useNavigate();
 
   const handleLogin = async (event) => {
     event.preventDefault();
@@ -13,6 +13,7 @@ export default function UlogIn() {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify({ uname, password }),
+      credentials: 'include', // Include cookies for session
     });
 
     const data = await response.json();
@@ -20,10 +21,11 @@ export default function UlogIn() {
       alert(data.error); // Show the error message returned from the server
     } else {
       alert('Logged in successfully');
-      navigate('/dashboard'); // Redirect to the dashboard
+      setIsAuthenticated(true); // Update authentication state
+      navigate('/Dashboard'); // Redirect to the dashboard
     }
   };
-  
+
   return (
     <div className="py-5">
       <div className="container mx-auto">
@@ -45,8 +47,8 @@ export default function UlogIn() {
                         id="uname"
                         name="uname"
                         type="text"
-                        value={uname} // Ensure controlled input
-                        onChange={(e) => setUname(e.target.value)} // Update state on change
+                        value={uname}
+                        onChange={(e) => setUname(e.target.value)}
                         required
                         className="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
                       />
@@ -62,8 +64,8 @@ export default function UlogIn() {
                         id="password"
                         name="password"
                         type="password"
-                        value={password} // Ensure controlled input
-                        onChange={(e) => setPassword(e.target.value)} // Update state on change
+                        value={password}
+                        onChange={(e) => setPassword(e.target.value)}
                         required
                         className="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
                       />
