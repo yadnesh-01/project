@@ -55,6 +55,7 @@ const UsignIn = () => {
                     <input
                       type="text"
                       name="username"
+                      placeholder='Jhon Harward'
                       required
                       value={formData.username}
                       onChange={handleChange}
@@ -69,6 +70,7 @@ const UsignIn = () => {
                     <input
                       type="text"
                       name="cont"
+                      placeholder='935214****'
                       className="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
                       required
                       value={formData.cont}
@@ -83,6 +85,7 @@ const UsignIn = () => {
                     <input
                       type="text"
                       name="uname"
+                      placeholder='jhon_har01'
                       className="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
                       required
                       value={formData.uname}
@@ -97,6 +100,7 @@ const UsignIn = () => {
                     <input
                       type="email"
                       name="email"
+                      placeholder='harwardjhon@gmail.com' 
                       className="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
                       required
                       value={formData.email}
@@ -111,6 +115,7 @@ const UsignIn = () => {
                     <input
                       type="password"
                       name="upass"
+                      placeholder='jhon@0101'
                       className="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
                       required
                       value={formData.upass}
@@ -125,6 +130,7 @@ const UsignIn = () => {
                     <input
                       type="password"
                       name="confirm_password"
+                      placeholder='jhon@0101'
                       className="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
                       required
                       value={formData.confirm_password}

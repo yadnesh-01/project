@@ -46,8 +46,9 @@ export default function UlogIn() {
                         id="ruid"
                         name="ruid"
                         type="text"
-                        value={ruid} // Ensure controlled input
-                        onChange={(e) => setUname(e.target.value)} // Update state on change
+                        value={ruid} 
+                        placeholder='hotel@admin'
+                        onChange={(e) => setUname(e.target.value)} 
                         required
                         className="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
                       />
@@ -63,8 +64,9 @@ export default function UlogIn() {
                         id="password"
                         name="password"
                         type="password"
-                        value={password} // Ensure controlled input
-                        onChange={(e) => setPassword(e.target.value)} // Update state on change
+                        value={password} 
+                        placeholder='*******'
+                        onChange={(e) => setPassword(e.target.value)}
                         required
                         className="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
                       />

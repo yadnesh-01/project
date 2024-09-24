@@ -11,6 +11,7 @@ import BookingForm from './components/User/BookingForm/BookingForm';
 import Dashboard from './components/User/Dashboard/Dashboard';
 import PreviousBookings from './components/User/Dashboard/PreviousBookings';
 import RDashboard from './components/Restaurant/RDashboard/RDashboard';
+import Logout from './components/User/Logout/Logout';
 // import ProtectedRoute from './components/ProtectedRoute';
 // import { useState } from 'react';
 
@@ -19,32 +20,18 @@ function App() {
   const [isAuthenticated, setIsAuthenticated] = useState(false);
 
   useEffect(() => {
-    const checkAuth = async () => {
-      const response = await fetch('http://localhost:8081/api/auth/user', {
-        credentials: 'include',
-      });
-      if (response.ok) {
-        setIsAuthenticated(true);
-      }
-    };
-    checkAuth();
-  }, []);
-
+   // Check if user is authenticated by checking localStorage
+   const authStatus = localStorage.getItem('isAuthenticated');
+   if (authStatus === 'true') {
+     setIsAuthenticated(true);
+   }
+ }, []);
   return (
     <Router >  
       {/* basename="/project/dist" */}
       <Hnavbar />
       <Routes>
       <Route path="/" element={<Home />} />
-      {/* <Route
-          path="/dashboard"
-          element={
-            <ProtectedRoute isAuthenticated={isAuthenticated}>
-              <Dashboard />
-            </ProtectedRoute>
-          }
-        /> */}
-        {/* <Route path="/Login" element={<UlogIn />} /> */}
 
         <Route path="/login" element={<UlogIn setIsAuthenticated={setIsAuthenticated} />} />
         <Route path="/Dashboard" element={isAuthenticated ? <Dashboard /> : <Navigate to="/login" />} />
@@ -56,6 +43,8 @@ function App() {
         {/* <Route path="/Dashboard" element={<Dashboard />} />
         <Route path="/PreviousBookings" element={<PreviousBookings />} /> */}
         <Route path="/Restaurant/RDashboard" element={<RDashboard />} />
+
+        <Route path="/logout" element={<Logout setIsAuthenticated={setIsAuthenticated} />} />
       </Routes> 
     </Router>
   );

@@ -39,9 +39,9 @@ const PreviousBookings = () => {
           <h3 className="text-2xl font-bold">Welcome, {username}!</h3>
           <p className="text-lg text-gray-600">Contact: {contact}</p>
 
-          {/* {loading ? (
+          {loading ? (
             <p>Loading your previous bookings...</p>
-          ) : pastBookings.length > 0 ? ( */}
+          ) : pastBookings.length > 0 ? (
             <>
               <h4 className="text-xl mt-4">Your Previous Bookings:</h4>
               <br/>
@@ -65,14 +65,19 @@ const PreviousBookings = () => {
                       <th className="px-4 py-2 border">Table No.</th>
                     </tr>
                   </thead>
-                  <tbody>
+                  <tbody className="text-center">
                     {pastBookings.map((booking) => (
                       <tr key={booking.id}>
                         <td className="px-4 py-2 border">{booking.id}</td>
-                        <td className="px-4 py-2 border">{booking.rname}</td>
+                        <td className="px-4 py-2 border text-justify">{booking.rname}</td>
                         <td className="px-4 py-2 border">{booking.rcontact}</td>
-                        <td className="px-4 py-2 border">{booking.radd}</td>
-                        <td className="px-4 py-2 border">{booking.res_date}</td>
+                        <td className="px-4 py-2 border text-justify">{booking.radd}</td>
+                        <td className="px-4 py-2 border"> {new Date(booking.res_date).toLocaleDateString('en-US', {
+                            year: 'numeric',
+                            month: 'long',
+                            day: 'numeric',
+                          })}
+                          </td>
                         <td className="px-4 py-2 border">{booking.res_time}</td>
                         <td className="px-4 py-2 border">{booking.tab_no}</td>
                       </tr>
@@ -81,9 +86,9 @@ const PreviousBookings = () => {
                 </table>
               </div>
             </>
-          {/* ) : (
+          ) : (
             <p>You have no previous bookings.</p>
-          )} */}
+          )} 
         </div>
       </div>
     </div>

@@ -54,9 +54,9 @@ const Dashboard = () => {
           <h3 className="text-2xl font-bold">Welcome, {username}!</h3>
           <p className="text-lg text-gray-600">Contact: {contact}</p>
 
-          {/* {loading ? (
+          {loading ? (
             <p>Loading your bookings...</p>
-          ) : bookings.length > 0 ? ( */}
+          ) : bookings.length > 0 ? (
             <>
               <h4 className="text-xl mt-4">Your Upcoming Bookings:</h4>
               <br/>
@@ -71,7 +71,7 @@ const Dashboard = () => {
                 <table className="min-w-full bg-white">
                   <thead>
                     <tr>
-                      <th className="px-4 py-2 border">Booking Id</th>
+                      <th className="px-4 py-2 border text-center">Booking Id</th>
                       <th className="px-4 py-2 border">Restaurant Name</th>
                       <th className="px-4 py-2 border">Contact</th>
                       <th className="px-4 py-2 border">Address</th>
@@ -83,16 +83,20 @@ const Dashboard = () => {
                   </thead>
                   <tbody>
                     {bookings
-                      .filter((booking) => new Date(booking.res_date) >= currentDate) // Only show upcoming or today's bookings
+                      .filter((booking) => new Date(booking.res_date) > currentDate) 
                       .map((booking) => (
                         <tr key={booking.id}>
-                          <td className="px-4 py-2 border">{booking.id}</td>
-                          <td className="px-4 py-2 border">{booking.rname}</td>
+                          <td className="px-4 py-2 border text-center">{booking.id}</td>
+                          <td className="px-4 py-2 border text-justify">{booking.rname}</td>
                           <td className="px-4 py-2 border">{booking.rcontact}</td>
-                          <td className="px-4 py-2 border">{booking.radd}</td>
-                          <td className="px-4 py-2 border">{booking.res_date}</td>
+                          <td className="px-4 py-2 border text-justify">{booking.radd}</td>
+                          <td className="px-4 py-2 border">{new Date(booking.res_date).toLocaleDateString('en-us',{
+                            year:'numeric',
+                            month:'long',
+                            day:'numeric',
+                          })}</td>
                           <td className="px-4 py-2 border">{booking.res_time}</td>
-                          <td className="px-4 py-2 border">{booking.tab_no}</td>
+                          <td className="px-4 py-2 border text-center">{booking.tab_no}</td>
                           <td className="px-4 py-2 border flex space-x-2">
                             <Link
                               to={`/update_reservation/${booking.id}`}
@@ -113,9 +117,9 @@ const Dashboard = () => {
                 </table>
               </div>
             </>
-          {/* ) : ( */}
+           ) : ( 
             <p>You have no upcoming bookings.</p>
-          {/* )} */}
+           )} 
         </div>
       </div>
     </div>

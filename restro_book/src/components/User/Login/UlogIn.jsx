@@ -20,7 +20,7 @@ export default function UlogIn({ setIsAuthenticated }) {
     if (!response.ok) {
       alert(data.error); // Show the error message returned from the server
     } else {
-      alert('Logged in successfully');
+      localStorage.setItem('isAuthenticated', true);
       setIsAuthenticated(true); // Update authentication state
       navigate('/Dashboard'); // Redirect to the dashboard
     }
@@ -48,6 +48,7 @@ export default function UlogIn({ setIsAuthenticated }) {
                         name="uname"
                         type="text"
                         value={uname}
+                        placeholder="jhon@01"
                         onChange={(e) => setUname(e.target.value)}
                         required
                         className="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
@@ -65,6 +66,7 @@ export default function UlogIn({ setIsAuthenticated }) {
                         name="password"
                         type="password"
                         value={password}
+                        placeholder="******"
                         onChange={(e) => setPassword(e.target.value)}
                         required
                         className="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
