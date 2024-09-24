@@ -1,3 +1,5 @@
+// src/components/Dashboard.jsx
+
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import { Link } from 'react-router-dom';
@@ -8,36 +10,33 @@ const Dashboard = () => {
   const [username, setUsername] = useState('');
   const [contact, setContact] = useState('');
 
-  // useEffect(() => {
-  //   // Fetch user data and bookings from the API
-  //   const fetchUserData = async () => {
-  //     try {
-  //       const userResponse = await axios.get('/api/user'); // Adjust this API call based on your setup
-  //       setUsername(userResponse.data.username);
-  //       setContact(userResponse.data.contact);
+  useEffect(() => {
+    const fetchUserData = async () => {
+      try {
+        const userResponse = await axios.get('http://localhost:8081/api/auth/user', { withCredentials: true });
+        setUsername(userResponse.data.username);
+        setContact(userResponse.data.cont);
+        setBookings(userResponse.data.bookings);
+        setLoading(false);
+      } catch (error) {
+        console.error('Error fetching data', error);
+        setLoading(false);
+      }
+    };
+    
+    fetchUserData();
+  }, []);
 
-  //       const bookingsResponse = await axios.get('/api/bookings'); // Fetch user bookings
-  //       setBookings(bookingsResponse.data);
-  //       setLoading(false);
-  //     } catch (error) {
-  //       console.error('Error fetching data', error);
-  //       setLoading(false);
-  //     }
-  //   };
-
-  //   fetchUserData();
-  // }, []);
-
-  // const deleteBooking = async (id) => {
-  //   if (window.confirm('Are you sure you want to delete this reservation?')) {
-  //     try {
-  //       await axios.delete(`/api/reservations/${id}`);
-  //       setBookings(bookings.filter((booking) => booking.id !== id));
-  //     } catch (error) {
-  //       console.error('Error deleting reservation', error);
-  //     }
-  //   }
-  // };
+  const deleteBooking = async (id) => {
+    if (window.confirm('Are you sure you want to delete this reservation?')) {
+      try {
+        await axios.delete(`http://localhost:8081/api/reservations/${id}`);
+        setBookings(bookings.filter((booking) => booking.id !== id));
+      } catch (error) {
+        console.error('Error deleting reservation', error);
+      }
+    }
+  };
 
   const currentDate = new Date();
 
@@ -53,8 +52,7 @@ const Dashboard = () => {
           ) : bookings.length > 0 ? ( */}
             <>
               <h4 className="text-xl mt-4">Your Upcoming Bookings:</h4>
-              <br />
-
+              <br/>
               <Link
                 to="/PreviousBookings"
                 className="btn bg-blue-500 text-white px-4 py-2 rounded mb-4"
@@ -108,10 +106,9 @@ const Dashboard = () => {
                 </table>
               </div>
             </>
-           {/* )
-           : (
+          {/* ) : ( */}
             <p>You have no upcoming bookings.</p>
-          )} */}
+          {/* )} */}
         </div>
       </div>
     </div>

@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
-import axios from 'axios';  // Make sure to install axios: npm install axios
+import axios from 'axios';  
 
 const UsignIn = () => {
   const [formData, setFormData] = useState({
@@ -24,7 +24,7 @@ const UsignIn = () => {
 
     try {
       // Send the data to the backend
-      const response = await axios.post('http://localhost:8081/api/register', formData);
+      const response = await axios.post('http://localhost:8081/api/auth/register', formData);
       
       // Handle success response
       if (response.status === 201) {

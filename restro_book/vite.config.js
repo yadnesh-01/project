@@ -5,6 +5,6 @@ import react from '@vitejs/plugin-react'
 
 // vite.config.js
 export default {
-  base: '/project/dist/',
+  // base: '/project/dist/',
   plugins: [react()]
 }

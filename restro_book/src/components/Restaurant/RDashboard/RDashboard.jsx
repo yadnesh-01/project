@@ -1,33 +1,29 @@
-// src/components/Restaurant/Dashboard/Dashboard.jsx
+// src/components/Restaurant/RDashboard/RDashboard.jsx
 
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import { Link } from 'react-router-dom';
 
-const Dashboard = () => {
+const RDashboard = () => {
   const [bookings, setBookings] = useState([]);
   const [loading, setLoading] = useState(true);
-  const [username, setUsername] = useState('');
-  const [contact, setContact] = useState('');
+  const [rname, setUsername] = useState('');
+  const [rcontact, setContact] = useState('');
 
   useEffect(() => {
-    // Fetch Restaurants data and bookings at their restaurant from the API
-
     const fetchUserData = async () => {
       try {
-        const userResponse = await axios.get('/api/user'); // Adjust this API call based on your setup
-        setUsername(userResponse.data.username);
-        setContact(userResponse.data.contact);
-
-        const bookingsResponse = await axios.get('/api/bookings'); // Fetch user bookings
-        setBookings(bookingsResponse.data);
+        const userResponse = await axios.get('http://localhost:8081/api/auth/user', { withCredentials: true });
+        setUsername(userResponse.data.rname);
+        setContact(userResponse.data.rcontact);
+        setBookings(userResponse.data.bookings);
         setLoading(false);
       } catch (error) {
         console.error('Error fetching data', error);
         setLoading(false);
       }
     };
-
+    
     fetchUserData();
   }, []);
 
@@ -35,8 +31,8 @@ const Dashboard = () => {
     <div className="py-5">
       <div className="container mx-auto">
         <div className="bg-white shadow-md rounded-lg p-5">
-          <h3 className="text-2xl font-bold">Welcome, {username}!</h3>
-          <p className="text-lg text-gray-600">Contact: {contact}</p>
+          <h3 className="text-2xl font-bold">Welcome Restaurant, {rname}!</h3>
+          <p className="text-lg text-gray-600">Contact: {rcontact}</p>
 
           {loading ? (
             <p>Loading your bookings...</p>
@@ -106,4 +102,4 @@ const Dashboard = () => {
   );
 };
 
-export default Dashboard;
+export default RDashboard;

@@ -1,16 +1,21 @@
 import React, { useState } from 'react';
-import { Link } from 'react-router-dom';
+import {useNavigate ,Link } from 'react-router-dom';
+import axios from 'axios';
+
 
 
 const Rsignin = () => {
   const [formData, setFormData] = useState({
-    username: '',
-    cont: '',
-    uname: '',
+    rname: '',
+    rcontact: '',
+    ruid: '',
+    radd: '',
     email: '',
-    upass: '',
+    rpass: '',
     confirm_password: '',
   });
+
+  const navigate = useNavigate(); // Initialize useNavigate
 
   const handleChange = (e) => {
     setFormData({
@@ -19,10 +24,22 @@ const Rsignin = () => {
     });
   };
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
-    // Add form validation and submission logic here
-    console.log(formData);
+
+    try {
+      // Send the data to the backend
+      const response = await axios.post('http://localhost:8081/api/auth/restRegister', formData);
+      
+      // Handle success response
+      if (response.status === 201) {
+        alert('Restaurant Registration successful!');
+        navigate('/Restaurant/Login'); // Redirects to login page
+      }
+    } catch (error) {
+      // Handle error response
+      alert(error.response?.data?.error || 'Something went wrong!');
+    }
   };
 
   return (
@@ -37,43 +54,57 @@ const Rsignin = () => {
               <div className="p-6 bg-white rounded-b-lg">
                 <form onSubmit={handleSubmit}>
                   <div className="mb-4">
-                    <label htmlFor="username" className="block text-sm font-medium text-gray-700">
+                    <label htmlFor="rname" className="block text-sm font-medium text-gray-700">
                       Restaurant Name
                     </label>
                     <input
                       type="text"
-                      name="username"
+                      name="rname"
                       className="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
                       required
-                      value={formData.username}
+                      value={formData.rname}
                       onChange={handleChange}
                     />
                   </div>
 
                   <div className="mb-4">
-                    <label htmlFor="cont" className="block text-sm font-medium text-gray-700">
+                    <label htmlFor="radd" className="block text-sm font-medium text-gray-700">
+                      Restaurant Address
+                    </label>
+                    <input
+                      type="text"
+                      name="radd"
+                      className="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
+                      required
+                      value={formData.radd}
+                      onChange={handleChange}
+                    />
+                  </div>
+
+                  <div className="mb-4">
+                    <label htmlFor="rcontact" className="block text-sm font-medium text-gray-700">
                       Phone Number
                     </label>
                     <input
                       type="text"
-                      name="cont"
+                      name="rcontact"
                       className="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
                       required
-                      value={formData.cont}
+                      value={formData.rcontact}
                       onChange={handleChange}
                     />
                   </div>
 
                   <div className="mb-4">
-                    <label htmlFor="uname" className="block text-sm font-medium text-gray-700">
+                    <label htmlFor="ruid" className="block text-sm font-medium text-gray-700">
                       User-ID
                     </label>
                     <input
                       type="text"
-                      name="uname"
+                      name="ruid"
                       className="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
                       required
-                      value={formData.uname}
+                      value={formData.ruid}
                       onChange={handleChange}
                     />
                   </div>
@@ -93,15 +124,15 @@ const Rsignin = () => {
                   </div>
 
                   <div className="mb-4">
-                    <label htmlFor="upass" className="block text-sm font-medium text-gray-700">
+                    <label htmlFor="rpass" className="block text-sm font-medium text-gray-700">
                       Password
                     </label>
                     <input
                       type="password"
-                      name="upass"
+                      name="rpass"
                       className="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
                       required
-                      value={formData.upass}
+                      value={formData.rpass}
                       onChange={handleChange}
                     />
                   </div>
