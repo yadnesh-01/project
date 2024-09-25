@@ -11,9 +11,10 @@ import BookingForm from './components/User/BookingForm/BookingForm';
 import Dashboard from './components/User/Dashboard/Dashboard';
 import PreviousBookings from './components/User/Dashboard/PreviousBookings';
 import RDashboard from './components/Restaurant/RDashboard/RDashboard';
+import RPrevious from './components/Restaurant/RDashboard/RPrevious';
 import Logout from './components/User/Logout/Logout';
-// import ProtectedRoute from './components/ProtectedRoute';
-// import { useState } from 'react';
+
+
 
 
 function App() {
@@ -28,7 +29,7 @@ function App() {
  }, []);
   return (
     <Router >  
-      {/* basename="/project/dist" */}
+      
       <Hnavbar />
       <Routes>
       <Route path="/" element={<Home />} />
@@ -37,12 +38,16 @@ function App() {
         <Route path="/Dashboard" element={isAuthenticated ? <Dashboard /> : <Navigate to="/login" />} />
         <Route path="/PreviousBookings" element={isAuthenticated ? <PreviousBookings /> : <Navigate to="/login" />} />
         <Route path="/Signin" element={<UsignIn />} />
-        <Route path="/Restaurant/Login" element={<Rlogin />} />
         <Route path="/Restaurant/Sigin" element={<Rsignin/>} />
         <Route path="/BookingForm" element={<BookingForm />} />
-        {/* <Route path="/Dashboard" element={<Dashboard />} />
-        <Route path="/PreviousBookings" element={<PreviousBookings />} /> */}
-        <Route path="/Restaurant/RDashboard" element={<RDashboard />} />
+        
+        {/* <Route path="/Restaurant/RDashboard" element={<RDashboard />} /> */}
+        {/* <Route path="/Restaurant/Login" element={<Rlogin />} /> */}
+
+        <Route path="/Restaurant/Login" element={<Rlogin setIsAuthenticated={setIsAuthenticated} />} />
+        <Route path="/Restaurant/RDashboard" element={isAuthenticated ? <RDashboard /> : <Navigate to="/Restaurant/Login" />} />
+        <Route path="/RPrevious" element={isAuthenticated ? <RPrevious /> : <Navigate to="/login" />} />
+
 
         <Route path="/logout" element={<Logout setIsAuthenticated={setIsAuthenticated} />} />
       </Routes> 

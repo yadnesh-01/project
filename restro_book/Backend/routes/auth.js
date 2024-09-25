@@ -48,25 +48,6 @@ router.post('/login', async (req, res) => {
   }
 });
 
-// Fetch user info and bookings
-router.get('/user', (req, res) => {
-  if (!req.session.authenticated) {
-    return res.status(401).json({ error: 'User not authenticated' });
-  }
-
-  const { username, cont } = req.session.user;
-
-  // Query to fetch bookings for the authenticated user
-  const bookingsSql = 'SELECT r.id, ri.rname, ri.rcontact, ri.radd, r.res_date, r.res_time, r.tab_no FROM restinfo ri JOIN reservations r ON ri.rname = r.rname WHERE r.username = ? ORDER BY r.res_date ASC, r.res_time ASC';
-   // Assuming 'uname' is the user identifier
-  db.query(bookingsSql, [req.session.user.uname], (err, bookings) => {
-    if (err) {
-      return res.status(500).json({ error: 'Database error' });
-    }
-
-    res.json({ username, cont, bookings });
-  });
-});
 
 // Registration endpoint
 router.post('/register', async (req, res) => {
@@ -100,6 +81,28 @@ router.post('/register', async (req, res) => {
     return res.status(500).json({ error: 'An error occurred while registering.' });
   }
 });
+
+
+// User Dashboard end point
+router.get('/user', (req, res) => {
+  if (!req.session.authenticated) {
+    return res.status(401).json({ error: 'User not authenticated' });
+  }
+
+  const { username, cont } = req.session.user;
+
+  // Query to fetch bookings for the authenticated user
+  const bookingsSql = 'SELECT r.id, ri.rname, ri.rcontact, ri.radd, r.res_date, r.res_time, r.tab_no FROM restinfo ri JOIN reservations r ON ri.rname = r.rname WHERE r.username = ? ORDER BY r.res_date ASC, r.res_time ASC';
+   // Assuming 'uname' is the user identifier
+  db.query(bookingsSql, [req.session.user.uname], (err, bookings) => {
+    if (err) {
+      return res.status(500).json({ error: 'Database error' });
+    }
+
+    res.json({ username, cont, bookings });
+  });
+});
+
 
 
 //Restaurant Registration endpoint
@@ -156,27 +159,47 @@ router.post('/rlogin', async (req, res) => {
         return res.status(400).json({ error: 'Invalid username or password' });
       }
 
-      const user = result[0];
+      const rest = result[0];
 
       // Compare hashed password
-      const isMatch = await bcrypt.compare(password, user.rpass);
+      const isMatch = await bcrypt.compare(password, rest.rpass);
       if (!isMatch) {
         return res.status(400).json({ error: 'Invalid username or password' });
       }
 
-      // // Set session authenticated
-      // req.session.authenticated = true;
-      // req.session.user = {`
-      //   uname: user.uname,
-      //   username: user.username,
-      //   cont: user.cont,
-      // };
+     // Set session authenticated
+      req.session.authenticated = true;
+      req.session.rest = {
+        ruid: rest.ruid,
+        rname: rest.rname,
+        rcontact: rest.rcontact,
+      };
 
-      res.json({ message: 'Logged in successfully', user: req.session.user });
+      res.json({ message: 'Logged in successfully', rest: req.session.rest });
     });
   } catch (error) {
     res.status(500).json({ error: 'An error occurred during login' });
   }
+});
+
+
+router.get('/restro', (req, res) => {
+  if (!req.session.authenticated) {
+    return res.status(401).json({ error: 'User not authenticated' });
+  }
+
+  const {rname , rcontact } = req.session.rest;
+
+  // Query to fetch bookings for the authenticated user
+  const bookingsSql = 'select r.id, u.username, u.cont, r.res_date, r.res_time, r.tab_no from userinfo u join reservations r on u.uname=r.username where r.rname=? ORDER BY r.res_date ASC, r.res_time ASC';
+   // Assuming 'rname' is the user identifier
+  db.query(bookingsSql, [req.session.rest.rname], (err, bookings) => {
+    if (err) {
+      return res.status(500).json({ error: 'Database error' });
+    }
+
+    res.json({ rname, rcontact, bookings });
+  });
 });
 
 

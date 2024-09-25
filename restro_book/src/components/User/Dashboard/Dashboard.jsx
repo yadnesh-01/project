@@ -83,7 +83,7 @@ const Dashboard = () => {
                   </thead>
                   <tbody>
                     {bookings
-                      .filter((booking) => new Date(booking.res_date) > currentDate) 
+                      .filter((booking) => new Date(booking.res_date) >= currentDate) 
                       .map((booking) => (
                         <tr key={booking.id}>
                           <td className="px-4 py-2 border text-center">{booking.id}</td>

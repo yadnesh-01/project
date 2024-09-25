@@ -1,14 +1,13 @@
-// src/components/Restaurant/RDashboard/RDashboard.jsx
-
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import { Link } from 'react-router-dom';
 
-const RDashboard = () => {
+const RPrevious = () => {
   const [bookings, setBookings] = useState([]);
   const [loading, setLoading] = useState(true);
   const [rname, setUsername] = useState('');
   const [rcontact, setContact] = useState('');
+  const [setIsAuthenticated] = useState(false); // Define isAuthenticated here
 
   useEffect(() => {
     const fetchUserData = async () => {
@@ -18,6 +17,7 @@ const RDashboard = () => {
         setContact(userResponse.data.rcontact);
         setBookings(userResponse.data.bookings);
         setLoading(false);
+        setIsAuthenticated(true); // Set isAuthenticated to true
       } catch (error) {
         console.error('Error fetching data', error);
         setLoading(false);
@@ -29,6 +29,9 @@ const RDashboard = () => {
 
   const currentDate = new Date();
 
+  // Filter out only past bookings
+  const pastBookings = bookings.filter((booking) => new Date(booking.res_date) < currentDate);
+
   return (
     <div className="py-5">
       <div className="container mx-auto">
@@ -37,22 +40,22 @@ const RDashboard = () => {
           <p className="text-lg text-gray-600">Contact: {rcontact}</p>
 
           {loading ? (
-            <p>Loading your bookings...</p>
-          ) : bookings.length > 0 ? (
+            <p>Loading your previous bookings...</p>
+          ) : pastBookings.length > 0 ? (
             <>
-              <h4 className="text-xl mt-4">Your Upcoming Bookings:</h4>
+              <h4 className="text-xl mt-4">Your Previous Bookings:</h4>
               <br/>
               <Link
-                to="/RPrevious"
+                to="/Restaurant/RDashboard"
                 className="btn bg-blue-500 text-white px-4 py-2 rounded mb-4"
               >
-                View Previous Bookings
+                View Current Bookings
               </Link>
 
               <div className="overflow-x-auto mt-4">
                 <table className="min-w-full bg-white">
                   <thead>
-                    <tr className='text-center'>
+                    <tr>
                       <th className="px-4 py-2 border">Booking Id</th>
                       <th className="px-4 py-2 border">Customer Name</th>
                       <th className="px-4 py-2 border">Contact</th>
@@ -61,35 +64,33 @@ const RDashboard = () => {
                       <th className="px-4 py-2 border">Table No.</th>
                     </tr>
                   </thead>
-                  <tbody className='text-center'>
-                    {bookings
-                      .filter((booking) => new Date(booking.res_date) >= currentDate) 
-                      .map((booking) => (
-                        <tr key={booking.id}>
-                          <td className="px-4 py-2 border">{booking.id}</td>
-                          <td className="px-4 py-2 border">{booking.username}</td>
-                          <td className="px-4 py-2 border">{booking.cont}</td>
-                          <td className="px-4 py-2 border">{new Date(booking.res_date).toLocaleDateString('en-us',{
-                            year:'numeric',
-                            month:'long',
-                            day:'numeric',
-                          })}</td>
-                          <td className="px-4 py-2 border">{booking.res_time}</td>
-                          <td className="px-4 py-2 border">{booking.tab_no}</td>
-                        </tr>
-                      ))}
+                  <tbody className="text-center">
+                    {pastBookings.map((booking) => (
+                      <tr key={booking.id}>
+                        <td className="px-4 py-2 border">{booking.id}</td>
+                        <td className="px-4 py-2 border ">{booking.username}</td>
+                        <td className="px-4 py-2 border">{booking.cont}</td>
+                        <td className="px-4 py-2 border"> {new Date(booking.res_date).toLocaleDateString('en-US', {
+                            year: 'numeric',
+                            month: 'long',
+                            day: 'numeric',
+                          })}
+                          </td>
+                        <td className="px-4 py-2 border">{booking.res_time}</td>
+                        <td className="px-4 py-2 border">{booking.tab_no}</td>
+                      </tr>
+                    ))}
                   </tbody>
                 </table>
               </div>
             </>
-           ) : ( 
-            <p>You have no upcoming bookings.</p>
-           )} 
+          ) : (
+            <p>You have no previous bookings.</p>
+          )} 
         </div>
       </div>
     </div>
   );
 };
 
-
-export default RDashboard;
+export default RPrevious;

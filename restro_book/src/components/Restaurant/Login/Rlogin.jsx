@@ -1,11 +1,10 @@
 import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 
-export default function UlogIn() {
+export default function UlogIn({ setIsAuthenticated }) {
   const [ruid, setUname] = useState('');
   const [password, setPassword] = useState('');
-  const navigate = useNavigate(); // Initialize useNavigate
-
+  const navigate = useNavigate();
 
   const handleLogin = async (event) => {
     event.preventDefault();
@@ -14,13 +13,15 @@ export default function UlogIn() {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify({ ruid, password }),
+      credentials: 'include', // Include cookies for session
     });
 
     const data = await response.json();
     if (!response.ok) {
       alert(data.error); // Show the error message returned from the server
     } else {
-      alert("Logged in Successfully!");
+      localStorage.setItem('isAuthenticated', true);
+      setIsAuthenticated(true); // Update authentication state
       navigate('/Restaurant/RDashboard'); // Redirect to the dashboard
     }
   };
@@ -75,7 +76,7 @@ export default function UlogIn() {
 
                   <div>
                     <button
-                      type="submit"
+                      type="submit" 
                       className="flex w-full justify-center rounded-md bg-indigo-600 px-3 py-1.5 text-sm font-semibold leading-6 text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600"
                     >
                       Sign in
