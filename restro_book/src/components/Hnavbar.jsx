@@ -1,18 +1,11 @@
-// src/components/Hnavbar.jsx
 import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
 
-const Hnavbar = () => {
+const Hnavbar = ({ isAuthenticated, userType, handleLogout }) => {
   const [isOpen, setIsOpen] = useState(false);
 
   const toggleMenu = () => {
     setIsOpen(!isOpen);
-  };
-
-  const handleLogout = () => {
-    localStorage.removeItem('isAuthenticated'); // Clear the auth status
-    setIsAuthenticated(false); // Update state
-    navigate('/login'); // Redirect to login
   };
 
   return (
@@ -21,11 +14,11 @@ const Hnavbar = () => {
         <nav className="flex items-center justify-between p-4">
           {/* Logo */}
           <Link
-              className="text-gray-800 hover:text-gray-600 transition-colors text-2xl "
-              to="/"
-            >
-              Restaurant Booking
-            </Link>
+            className="text-gray-800 hover:text-gray-600 transition-colors text-2xl"
+            to="/"
+          >
+            Restaurant Booking
+          </Link>
 
           {/* Hamburger Menu Button for Small Screens */}
           <button
@@ -48,35 +41,69 @@ const Hnavbar = () => {
             </svg>
           </button>
 
-          {/* Links - Hidden on Small Screens */}
-          <div className={`flex-col md:flex-row flex md:flex items-center space-x-4 md:space-x-4 ${isOpen ? 'block' : 'hidden'} md:block`}>
-            <Link
-              className="text-gray-800 hover:text-gray-600 transition-colors"
-              to="/Login"
-            >
-              Customer LogIn
-            </Link>
+          {/* Links */}
+          <div
+            className={`flex-col md:flex-row flex md:flex items-center space-x-4 md:space-x-4 ${
+              isOpen ? 'block' : 'hidden'
+            } md:block`}
+          >
+            {!isAuthenticated ? (
+              <>
+                {/* Links for unauthenticated users */}
+                <Link
+                  className="text-gray-800 hover:text-gray-600 transition-colors"
+                  to="/Login"
+                >
+                  Customer LogIn
+                </Link>
 
-            <Link
-              className="text-gray-800 hover:text-gray-600 transition-colors"
-              to="/Restaurant/Login"
-            >
-              Restaurant LogIn
-            </Link>
+                <Link
+                  className="text-gray-800 hover:text-gray-600 transition-colors"
+                  to="/Restaurant/Login"
+                >
+                  Restaurant LogIn
+                </Link>
+              </>
+            ) : userType === 'customer' ? (
+              <>
+                {/* Links for authenticated customers */}
+                <Link
+                  className="text-gray-800 hover:text-gray-600 transition-colors"
+                  to="/BookingForm"
+                >
+                  Book Now
+                </Link>
+                <Link
+                  className="text-gray-800 hover:text-gray-600 transition-colors"
+                  to="/Dashboard"
+                >
+                  Dashboard
+                </Link>
+                <Link
+                  className="text-gray-800 hover:text-gray-600 transition-colors"
+                  onClick={handleLogout}
+                >
+                  Logout
+                </Link>
+              </>
+            ) : (
+              <>
+                {/* Links for authenticated restaurants */}
+                <Link
+                  className="text-gray-800 hover:text-gray-600 transition-colors"
+                  to="/Restaurant/RDashboard"
+                >
+                  Restaurant Dashboard
+                </Link>
 
-            <Link
-              className="text-gray-800 hover:text-gray-600 transition-colors"
-              to="/BookingForm"
-            >
-              Book Now
-            </Link>
-
-            <Link
-              className="text-gray-800 hover:text-gray-600 transition-colors"
-              onClick={handleLogout}
-            >
-              Logout
-            </Link>
+                <Link
+                  className="text-gray-800 hover:text-gray-600 transition-colors"
+                  onClick={handleLogout}
+                >
+                  Logout
+                </Link>
+              </>
+            )}
           </div>
         </nav>
       </div>

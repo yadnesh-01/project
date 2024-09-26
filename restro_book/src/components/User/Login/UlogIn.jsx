@@ -4,25 +4,38 @@ import { useNavigate } from 'react-router-dom';
 export default function UlogIn({ setIsAuthenticated }) {
   const [uname, setUname] = useState('');
   const [password, setPassword] = useState('');
+  const [loading, setLoading] = useState(false);
+  const [error, setError] = useState('');
   const navigate = useNavigate();
 
   const handleLogin = async (event) => {
     event.preventDefault();
+    setLoading(true); // Start loading
+    setError(''); // Clear any previous errors
 
-    const response = await fetch('http://localhost:8081/api/auth/login', {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({ uname, password }),
-      credentials: 'include', // Include cookies for session
-    });
+    try {
+      const response = await fetch('http://localhost:8081/api/auth/login', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ uname, password }),
+        credentials: 'include', // Include cookies for session
+      });
 
-    const data = await response.json();
-    if (!response.ok) {
-      alert(data.error); // Show the error message returned from the server
-    } else {
-      localStorage.setItem('isAuthenticated', true);
-      setIsAuthenticated(true); // Update authentication state
-      navigate('/Dashboard'); // Redirect to the dashboard
+      const data = await response.json();
+      if (!response.ok) {
+        // If the response is not okay, display the error
+        setError(data.error || 'Login failed. Please check your credentials.');
+      } else {
+        // Successful login
+        localStorage.setItem('isAuthenticated', 'true');
+        setIsAuthenticated(true); // Update authentication state
+        navigate('/Dashboard'); // Redirect to the dashboard
+      }
+    } catch (err) {
+      // Handle any unexpected errors
+      setError('Something went wrong. Please try again.');
+    } finally {
+      setLoading(false); // Stop loading
     }
   };
 
@@ -38,6 +51,9 @@ export default function UlogIn({ setIsAuthenticated }) {
 
               <div className="mt-10 sm:mx-auto sm:w-full sm:max-w-sm">
                 <form onSubmit={handleLogin} className="space-y-6">
+                  {/* Error message */}
+                  {error && <p className="text-red-600 text-center">{error}</p>}
+
                   <div>
                     <label htmlFor="uname" className="block text-sm font-medium leading-6 text-gray-900">
                       User Id
@@ -48,7 +64,7 @@ export default function UlogIn({ setIsAuthenticated }) {
                         name="uname"
                         type="text"
                         value={uname}
-                        placeholder="jhon@01"
+                        placeholder="john@01"
                         onChange={(e) => setUname(e.target.value)}
                         required
                         className="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
@@ -78,8 +94,9 @@ export default function UlogIn({ setIsAuthenticated }) {
                     <button
                       type="submit"
                       className="flex w-full justify-center rounded-md bg-indigo-600 px-3 py-1.5 text-sm font-semibold leading-6 text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600"
+                      disabled={loading} // Disable button while loading
                     >
-                      Sign in
+                      {loading ? 'Signing in...' : 'Sign in'}
                     </button>
                   </div>
                 </form>

@@ -12,7 +12,6 @@ import PreviousBookings from './components/User/Dashboard/PreviousBookings';
 import RDashboard from './components/Restaurant/RDashboard/RDashboard';
 import RPrevious from './components/Restaurant/RDashboard/RPrevious';
 
-
 function App() {
   const [isAuthenticated, setIsAuthenticated] = useState(false);
 
@@ -22,24 +21,33 @@ function App() {
     setIsAuthenticated(authStatus === 'true');
   }, []);
 
+  const handleLogout = () => {
+    setIsAuthenticated(false);
+    localStorage.removeItem('isAuthenticated');
+    // Optionally remove user data if stored
+    localStorage.removeItem('user');
+    Navigate('/Login');
+  };
+
   return (
-    <Router>  
-      <Hnavbar />
+    <Router>
+      <Hnavbar isAuthenticated={isAuthenticated} handleLogout={handleLogout} />
       <Routes>
         <Route path="/" element={<Home />} />
         <Route path="/login" element={<UlogIn setIsAuthenticated={setIsAuthenticated} />} />
-        <Route path="/Dashboard" element={isAuthenticated ? <Dashboard /> : <Navigate to="/login" />} />
-        <Route path="/PreviousBookings" element={isAuthenticated ? <PreviousBookings /> : <Navigate to="/login" />} />
         <Route path="/Signin" element={<UsignIn />} />
         <Route path="/Restaurant/Sigin" element={<Rsignin />} />
-        <Route path="/BookingForm" element={isAuthenticated ? <BookingForm /> : <Navigate to="/login" />} />
         <Route path="/Restaurant/Login" element={<Rlogin setIsAuthenticated={setIsAuthenticated} />} />
+
+        {/* Protected Routes */}
+        <Route path="/Dashboard" element={isAuthenticated ? <Dashboard /> : <Navigate to="/login" />} />
+        <Route path="/PreviousBookings" element={isAuthenticated ? <PreviousBookings /> : <Navigate to="/login" />} />
+        <Route path="/BookingForm" element={isAuthenticated ? <BookingForm /> : <Navigate to="/login" />} />
         <Route path="/Restaurant/RDashboard" element={isAuthenticated ? <RDashboard /> : <Navigate to="/Restaurant/Login" />} />
         <Route path="/RPrevious" element={isAuthenticated ? <RPrevious /> : <Navigate to="/login" />} />
-        
-      </Routes> 
+      </Routes>
     </Router>
   );
-};
+}
 
 export default App;
