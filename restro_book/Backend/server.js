@@ -23,9 +23,21 @@ app.use(session({
 
 app.use('/api/auth', authRoutes);
 
+
+
+app.use((req, res, next) => {
+  if (req.session && req.session.authenticated) {
+    next(); // User is authenticated, proceed to the next middleware
+  } else {
+    res.status(401).json({ error: 'User not authenticated' }); // User is not authenticated
+  }
+});
+
+
 // Other middleware and routes...
 
 const PORT = process.env.PORT || 8081;
 app.listen(PORT, () => {
   console.log(`Server is running on port ${PORT}`);
 });
+

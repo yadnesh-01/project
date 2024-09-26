@@ -91,6 +91,8 @@ router.get('/user', (req, res) => {
 
   const { username, cont } = req.session.user;
 
+  console.log("Session data:", req.session);
+
   // Query to fetch bookings for the authenticated user
   const bookingsSql = 'SELECT r.id, ri.rname, ri.rcontact, ri.radd, r.res_date, r.res_time, r.tab_no FROM restinfo ri JOIN reservations r ON ri.rname = r.rname WHERE r.username = ? ORDER BY r.res_date ASC, r.res_time ASC';
    // Assuming 'uname' is the user identifier
@@ -101,6 +103,44 @@ router.get('/user', (req, res) => {
 
     res.json({ username, cont, bookings });
   });
+});
+
+
+// inserting user reservations
+
+router.post('/bookrest', async (req, res) => {
+  try {
+    const { rname, date, time, tab_no } = req.body;
+
+    // Ensure user is authenticated
+    if (!req.session.authenticated) {
+      return res.status(401).json({ error: 'User not authenticated' });
+    }
+
+    // Check if session user exists and has necessary details
+    const { uname, cont } = req.session.user;
+
+    if (!uname || !cont) {
+      return res.status(400).json({ error: 'User details not found in session' });
+    }
+
+    console.log('Request body:', req.body);
+
+    // Insert reservation data into the database
+    const result = await db.execute(
+      'INSERT INTO reservations (rname, res_date, res_time, tab_no, username, cont) VALUES (?, ?, ?, ?, ?, ?)',
+      [rname, date, time, tab_no, uname, cont] // Using session user data
+    );
+
+    console.log("Data Inserted Successfully");
+
+    // Respond with success
+    res.status(201).json({ message: 'Booking created successfully', bookingId: result.insertId });
+
+  } catch (error) {
+    console.error('Error creating booking:', error); // Log the error
+    res.status(500).json({ message: 'Error creating booking', error: error.message }); // Send detailed error
+  }
 });
 
 

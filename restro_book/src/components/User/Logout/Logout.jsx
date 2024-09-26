@@ -1,28 +1,19 @@
-// src/components/User/Logout/Logout.jsx
-
-import { useEffect } from 'react';
+import React from 'react';
 import { useNavigate } from 'react-router-dom';
 
 const Logout = ({ setIsAuthenticated }) => {
   const navigate = useNavigate();
 
-  useEffect(() => {
-    // Clear session data from localStorage
-    localStorage.removeItem('isAuthenticated');
-    
-    // Clear cookies if necessary
-    document.cookie = 'connect.sid=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;'; // adjust for session cookies
-
-    // Update authentication state
-    setIsAuthenticated(false);
-
-    // Redirect to the login page after logout
-    navigate('/LogIn');
-  }, [navigate, setIsAuthenticated]);
+  const handleLogout = () => {
+    localStorage.removeItem('isAuthenticated'); // Clear the auth status
+    setIsAuthenticated(false); // Update state
+    navigate('/login'); // Redirect to login
+  };
 
   return (
     <div>
-      <h1>Logging you out...</h1>
+      <h2>You have been logged out.</h2>
+      <button onClick={handleLogout}>Login Again</button>
     </div>
   );
 };
