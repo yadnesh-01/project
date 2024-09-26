@@ -11,7 +11,7 @@ import Dashboard from './components/User/Dashboard/Dashboard';
 import PreviousBookings from './components/User/Dashboard/PreviousBookings';
 import RDashboard from './components/Restaurant/RDashboard/RDashboard';
 import RPrevious from './components/Restaurant/RDashboard/RPrevious';
-import Logout from './components/User/Logout/Logout';
+
 
 function App() {
   const [isAuthenticated, setIsAuthenticated] = useState(false);
@@ -36,7 +36,7 @@ function App() {
         <Route path="/Restaurant/Login" element={<Rlogin setIsAuthenticated={setIsAuthenticated} />} />
         <Route path="/Restaurant/RDashboard" element={isAuthenticated ? <RDashboard /> : <Navigate to="/Restaurant/Login" />} />
         <Route path="/RPrevious" element={isAuthenticated ? <RPrevious /> : <Navigate to="/login" />} />
-        <Route path="/logout" element={<Logout setIsAuthenticated={setIsAuthenticated} />} />
+        
       </Routes> 
     </Router>
   );
