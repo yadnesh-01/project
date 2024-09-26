@@ -9,6 +9,12 @@ const Hnavbar = () => {
     setIsOpen(!isOpen);
   };
 
+  const handleLogout = () => {
+    localStorage.removeItem('isAuthenticated'); // Clear the auth status
+    setIsAuthenticated(false); // Update state
+    navigate('/login'); // Redirect to login
+  };
+
   return (
     <div className="w-full bg-gray-100 shadow-md">
       <div className="container mx-auto">
@@ -67,7 +73,7 @@ const Hnavbar = () => {
 
             <Link
               className="text-gray-800 hover:text-gray-600 transition-colors"
-              to="/Logout"
+              onClick={handleLogout}
             >
               Logout
             </Link>
