@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
 
-const Hnavbar = ({ isAuthenticated, userType, handleLogout }) => {
+const Hnavbar = ({ isAuthenticated, userType, handleLogout, setUserType }) => {
   const [isOpen, setIsOpen] = useState(false);
 
   const toggleMenu = () => {
@@ -52,6 +52,7 @@ const Hnavbar = ({ isAuthenticated, userType, handleLogout }) => {
                 {/* Links for unauthenticated users */}
                 <Link
                   className="text-gray-800 hover:text-gray-600 transition-colors"
+                  onClick={() => setUserType('customer')}
                   to="/Login"
                 >
                   Customer LogIn
@@ -59,6 +60,7 @@ const Hnavbar = ({ isAuthenticated, userType, handleLogout }) => {
 
                 <Link
                   className="text-gray-800 hover:text-gray-600 transition-colors"
+                  onClick={() => setUserType('restaurant')}
                   to="/Restaurant/Login"
                 >
                   Restaurant LogIn
@@ -95,7 +97,6 @@ const Hnavbar = ({ isAuthenticated, userType, handleLogout }) => {
                 >
                   Restaurant Dashboard
                 </Link>
-
                 <Link
                   className="text-gray-800 hover:text-gray-600 transition-colors"
                   onClick={handleLogout}

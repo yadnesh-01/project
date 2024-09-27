@@ -13,6 +13,7 @@ import RDashboard from './components/Restaurant/RDashboard/RDashboard';
 import RPrevious from './components/Restaurant/RDashboard/RPrevious';
 
 function App() {
+  const [userType, setUserType] = useState(null);
   const [isAuthenticated, setIsAuthenticated] = useState(false);
 
   useEffect(() => {
@@ -31,7 +32,11 @@ function App() {
 
   return (
     <Router>
-      <Hnavbar isAuthenticated={isAuthenticated} handleLogout={handleLogout} />
+      <Hnavbar isAuthenticated={isAuthenticated} 
+               handleLogout={handleLogout}  
+               userType={userType} 
+               setUserType={setUserType} 
+      />
       <Routes>
         <Route path="/" element={<Home />} />
         <Route path="/login" element={<UlogIn setIsAuthenticated={setIsAuthenticated} />} />
