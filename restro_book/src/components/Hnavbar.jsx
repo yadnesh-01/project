@@ -51,7 +51,7 @@ const Hnavbar = ({ isAuthenticated, userType, handleLogout, setUserType }) => {
               <>
                 {/* Links for unauthenticated users */}
                 <Link
-                  className="text-pink-700 hover:text-gray-600 transition-colors font-bold"
+                  className="text-pink-700 hover:text-gray-600  bg-gray-200 hover:bg-white bg-opacity-80 transition-colors font-bold"
                   onClick={() => setUserType('customer')}
                   to="/Login"
                 >
@@ -59,7 +59,7 @@ const Hnavbar = ({ isAuthenticated, userType, handleLogout, setUserType }) => {
                 </Link>
 
                 <Link
-                  className="text-pink-700 hover:text-gray-600  transition-colors font-bold"
+                  className="text-pink-700 hover:text-gray-600 bg-gray-200 hover:bg-white bg-opacity-80  transition-colors font-bold"
                   onClick={() => setUserType('restaurant')}
                   to="/Restaurant/Login"
                 >
@@ -70,19 +70,19 @@ const Hnavbar = ({ isAuthenticated, userType, handleLogout, setUserType }) => {
               <>
                 {/* Links for authenticated customers */}
                 <Link
-                  className="text-pink-700 hover:text-gray-600 bg-gray-200 bg-opacity-80 transition-colors font-bold"
+                  className="text-pink-700 hover:text-gray-600 bg-gray-200 hover:bg-white bg-opacity-80 transition-colors font-bold"
                   to="/BookingForm"
                 >
                   Book Now
                 </Link>
                 <Link
-                  className="text-pink-700 hover:text-gray-600 bg-gray-200 bg-opacity-80 transition-colors font-bold"
+                  className="text-pink-700 hover:text-gray-600 bg-gray-200 hover:bg-white bg-opacity-80 transition-colors font-bold"
                   to="/Dashboard"
                 >
                   Dashboard
                 </Link>
                 <Link
-                  className="text-pink-700 hover:text-gray-600  bg-gray-200 bg-opacity-80 transition-colors font-bold"
+                  className="text-pink-700 hover:text-gray-600  bg-gray-200 hover:bg-white bg-opacity-80 transition-colors font-bold"
                   onClick={handleLogout}
                 >
                   Logout
@@ -92,13 +92,13 @@ const Hnavbar = ({ isAuthenticated, userType, handleLogout, setUserType }) => {
               <>
                 {/* Links for authenticated restaurants */}
                 <Link
-                  className="text-pink-700 hover:text-gray-600 bg-gray-200 bg-opacity-80 transition-colors font-bold"
+                  className="text-pink-700 hover:text-gray-600 bg-gray-200 hover:bg-white bg-opacity-80 transition-colors font-bold"
                   to="/Restaurant/RDashboard"
                 >
                   Restaurant Dashboard
                 </Link>
                 <Link
-                  className="text-pink-700 hover:text-gray-600 bg-gray-200 bg-opacity-80 transition-colors font-bold"
+                  className="text-pink-700 hover:text-gray-600 bg-gray-200 hover:bg-white bg-opacity-80 transition-colors font-bold"
                   onClick={handleLogout}
                 >
                   Logout

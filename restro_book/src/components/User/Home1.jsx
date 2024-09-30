@@ -15,7 +15,7 @@ const Home = () => {
       <header className="relative">
         <div className="container mx-auto relative">
           <div className="absolute top-0 left-0 w-full h-full flex items-center justify-center">
-            <Link to="/login" className="bg-indigo-600 text-white py-2 px-4 rounded shadow-lg">
+            <Link to="/BookingForm" className="bg-indigo-600 text-white py-2 px-4 rounded shadow-lg">
               Book Now
             </Link>
           </div>
