@@ -9,12 +9,12 @@ const Hnavbar = ({ isAuthenticated, userType, handleLogout, setUserType }) => {
   };
 
   return (
-    <div className="w-full bg-gray-100 shadow-md">
+    <div className="w-full bg-gray-100 shadow-md bg-[url('https://www.fodors.com/wp-content/uploads/2019/04/TraditionalfoodsinJava__HERO_shutterstock_1161085942.jpg')] bg-center bg-cover">
       <div className="container mx-auto">
         <nav className="flex items-center justify-between p-4">
           {/* Logo */}
           <Link
-            className="text-gray-800 hover:text-gray-600 transition-colors text-2xl"
+            className="text-gray-100 hover:text-gray-200 transition-colors text-2xl font-bold"
             to="/"
           >
             Restaurant Booking
@@ -22,7 +22,7 @@ const Hnavbar = ({ isAuthenticated, userType, handleLogout, setUserType }) => {
 
           {/* Hamburger Menu Button for Small Screens */}
           <button
-            className="block md:hidden text-gray-800 hover:text-gray-600 focus:outline-none"
+            className="block md:hidden text-gray-100 hover:text-gray-200 focus:outline-none"
             onClick={toggleMenu}
           >
             <svg
@@ -51,7 +51,7 @@ const Hnavbar = ({ isAuthenticated, userType, handleLogout, setUserType }) => {
               <>
                 {/* Links for unauthenticated users */}
                 <Link
-                  className="text-gray-800 hover:text-gray-600 transition-colors"
+                  className="text-pink-700 hover:text-gray-600 transition-colors font-bold"
                   onClick={() => setUserType('customer')}
                   to="/Login"
                 >
@@ -59,7 +59,7 @@ const Hnavbar = ({ isAuthenticated, userType, handleLogout, setUserType }) => {
                 </Link>
 
                 <Link
-                  className="text-gray-800 hover:text-gray-600 transition-colors"
+                  className="text-pink-700 hover:text-gray-600  transition-colors font-bold"
                   onClick={() => setUserType('restaurant')}
                   to="/Restaurant/Login"
                 >
@@ -70,19 +70,19 @@ const Hnavbar = ({ isAuthenticated, userType, handleLogout, setUserType }) => {
               <>
                 {/* Links for authenticated customers */}
                 <Link
-                  className="text-gray-800 hover:text-gray-600 transition-colors"
+                  className="text-pink-700 hover:text-gray-600 bg-gray-200 bg-opacity-80 transition-colors font-bold"
                   to="/BookingForm"
                 >
                   Book Now
                 </Link>
                 <Link
-                  className="text-gray-800 hover:text-gray-600 transition-colors"
+                  className="text-pink-700 hover:text-gray-600 bg-gray-200 bg-opacity-80 transition-colors font-bold"
                   to="/Dashboard"
                 >
                   Dashboard
                 </Link>
                 <Link
-                  className="text-gray-800 hover:text-gray-600 transition-colors"
+                  className="text-pink-700 hover:text-gray-600  bg-gray-200 bg-opacity-80 transition-colors font-bold"
                   onClick={handleLogout}
                 >
                   Logout
@@ -92,13 +92,13 @@ const Hnavbar = ({ isAuthenticated, userType, handleLogout, setUserType }) => {
               <>
                 {/* Links for authenticated restaurants */}
                 <Link
-                  className="text-gray-800 hover:text-gray-600 transition-colors"
+                  className="text-pink-700 hover:text-gray-600 bg-gray-200 bg-opacity-80 transition-colors font-bold"
                   to="/Restaurant/RDashboard"
                 >
                   Restaurant Dashboard
                 </Link>
                 <Link
-                  className="text-gray-800 hover:text-gray-600 transition-colors"
+                  className="text-pink-700 hover:text-gray-600 bg-gray-200 bg-opacity-80 transition-colors font-bold"
                   onClick={handleLogout}
                 >
                   Logout

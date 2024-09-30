@@ -35,7 +35,7 @@ const RPrevious = () => {
   return (
     <div className="py-5">
       <div className="container mx-auto">
-        <div className="bg-white shadow-md rounded-lg p-5">
+      <div className="bg-[url('https://wallpapers.com/images/hd/healthy-food-background-k4nsqgrjnoi1fuhk.jpg')] bg-cover bg-center rounded-lg p-5">
           <h3 className="text-2xl font-bold">Welcome, {rname}!</h3>
           <p className="text-lg text-gray-600">Contact: {rcontact}</p>
 

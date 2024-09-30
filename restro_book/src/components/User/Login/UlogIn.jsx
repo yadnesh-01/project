@@ -44,9 +44,9 @@ export default function UlogIn({ setIsAuthenticated }) {
       <div className="container mx-auto">
         <div className="flex justify-center">
           <div className="w-full max-w-md">
-            <div className="shadow-lg rounded-lg">
-              <div className="bg-gray-100 p-4 rounded-t-lg">
-                <h3 className="text-lg font-bold text-center">User Login Form</h3>
+            <div className="shadow-lg rounded-lg bg-[url('https://i0.wp.com/www.designlike.com/wp-content/uploads/2018/03/restaurant-1948732_1920.jpg')] bg-cover bg-center">
+              <div className="bg-[url('https://i0.wp.com/www.designlike.com/wp-content/uploads/2018/03/restaurant-1948732_1920.jpg')] p-4 rounded-t-lg">
+                <h2 className="text-lg font-bold text-center text-white">User Login Form</h2>
               </div>
 
               <div className="mt-10 sm:mx-auto sm:w-full sm:max-w-sm">
@@ -55,7 +55,7 @@ export default function UlogIn({ setIsAuthenticated }) {
                   {error && <p className="text-red-600 text-center">{error}</p>}
 
                   <div>
-                    <label htmlFor="uname" className="block text-sm font-medium leading-6 text-gray-900">
+                    <label htmlFor="uname" className="block text-sm font-medium leading-6 text-gray-100">
                       User Id
                     </label>
                     <div className="mt-2">
@@ -73,7 +73,7 @@ export default function UlogIn({ setIsAuthenticated }) {
                   </div>
 
                   <div>
-                    <label htmlFor="password" className="block text-sm font-medium leading-6 text-gray-900">
+                    <label htmlFor="password" className="block text-sm font-medium leading-6 text-gray-100 ">
                       Password
                     </label>
                     <div className="mt-2">
@@ -101,9 +101,9 @@ export default function UlogIn({ setIsAuthenticated }) {
                   </div>
                 </form>
 
-                <p className="mt-10 text-center text-sm text-gray-500">
+                <p className="mt-10 text-center text-sm text-teal-100">
                   Not a member?{' '}
-                  <a href="/Signin" className="font-semibold leading-6 text-indigo-600 hover:text-indigo-500">
+                  <a href="/Signin" className="font-semibold leading-6 text-indigo-200 hover:text-indigo-200">
                     Create New Account
                   </a>
                 </p>

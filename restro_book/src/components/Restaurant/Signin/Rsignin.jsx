@@ -48,10 +48,10 @@ const Rsignin = () => {
         <div className="flex justify-center">
           <div className="w-full max-w-md">
             <div className="shadow-lg rounded-lg">
-              <div className="bg-gray-100 p-4 rounded-t-lg">
-                <h4 className="text-lg font-bold text-center">Restaurant Registration Form</h4>
+            <div className=" p-4 rounded-t-lg bg-[url('https://cmkt-image-prd.freetls.fastly.net/0.1.0/ps/106396/910/606/m2/fpnw/wm1/keih4mm9pyv3kpq8scymlnub2aecxzs9iscdane82nvbmfcc3leqqh7pjk0adoki-.jpg?1399222056&s=d4d7e3d9d10ef5cb29365912c8c531b2')] ">
+            <h4 className="text-lg font-bold text-center">Restaurant Registration Form</h4>
               </div>
-              <div className="p-6 bg-white rounded-b-lg">
+              <div className="p-6 rounded-b-lg bg-[url('https://cmkt-image-prd.freetls.fastly.net/0.1.0/ps/106396/910/606/m2/fpnw/wm1/keih4mm9pyv3kpq8scymlnub2aecxzs9iscdane82nvbmfcc3leqqh7pjk0adoki-.jpg?1399222056&s=d4d7e3d9d10ef5cb29365912c8c531b2')] bg-cover bg-center">
                 <form onSubmit={handleSubmit}>
                   <div className="mb-4">
                     <label htmlFor="rname" className="block text-sm font-medium text-gray-700">

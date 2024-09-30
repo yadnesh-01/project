@@ -10,7 +10,7 @@ import sayajiImg from '../images/clients/sayaji.jpg';
 const Home = () => {
   return (
     <div>
-        <br/>
+        {/* <br/> */}
       {/* Header Section */}
       <header className="relative">
         <div className="container mx-auto relative">
