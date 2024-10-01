@@ -131,6 +131,7 @@ router.post('/bookrest', async (req, res) => {
       'INSERT INTO reservations (rname, res_date, res_time, tab_no, username, cont) VALUES (?, ?, ?, ?, ?, ?)',
       [rname, date, time, tab_no, uname, cont] // Using session user data
     );
+    
 
     console.log("Data Inserted Successfully");
 
@@ -143,6 +144,67 @@ router.post('/bookrest', async (req, res) => {
   }
 });
 
+
+// delete reservation 
+
+router.delete('/deleteRes/:id', async (req, res) => {
+  try {
+    const id = req.params.id;
+    
+    // Ensure user is authenticated
+    if (!req.session || !req.session.authenticated) {
+      return res.status(401).json({ error: 'User not authenticated' });
+    }
+    
+    const { uname, cont } = req.session.user;
+    
+    console.log(`Reservation ID: ${id}`);
+    console.log(`User Name: ${uname}`);
+    console.log(`Contact: ${cont}`);
+
+    const query = 'DELETE FROM reservations WHERE id = ?';
+
+    db.query(query, [id], (err, results) => {
+      if (err) {
+        console.error('Error deleting reservation:', err);
+        return res.status(500).json({ error: 'Error deleting reservation' });
+      }
+      
+      if (results.affectedRows === 0) {
+        return res.status(404).json({ message: 'Reservation not found' });
+      }
+
+      return res.json({ message: `Reservation with ID ${id} deleted successfully` });
+    });
+    
+  } catch (error) {
+    console.error('Error in deleting reservation:', error);
+    return res.status(500).json({ error: 'Error occurred while deleting the reservation' });
+  }
+});
+
+
+// Update Reservation
+router.put('/updateRes/:id', async (req, res) => {
+  try {
+    const id = req.params.id;
+    const{uname ,cont } = req.session.user;
+    const { res_date, res_time, tab_no } = req.body;
+
+    if(!req.session.authenticated){
+      return res.status(401).json({error: 'User not authenticated'});
+    }
+    const query = `UPDATE reservations SET res_date = ?, res_time = ?, tab_no = ?
+    WHERE id = ?`;
+    db.query(query, id,(err,results)=>{
+
+    })
+
+  }catch{
+    console.error("Error in Updating reservation : ",error);
+    return res.status(500).json({error:'Error at time of Updating reservation'});
+  }
+});
 
 
 //Restaurant Registration endpoint
@@ -244,3 +306,5 @@ router.get('/restro', (req, res) => {
 
 
 module.exports = router;
+
+ 

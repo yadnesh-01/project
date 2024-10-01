@@ -33,13 +33,23 @@ const Dashboard = () => {
   const deleteBooking = async (id) => {
     if (window.confirm('Are you sure you want to delete this reservation?')) {
       try {
-        await axios.delete(`http://localhost:8081/api/deleteRes/${id}`);
-        setBookings(bookings.filter((booking) => booking.id !== id));
+        const response = await axios.delete(`http://localhost:8081/api/auth/deleteRes/${id}`, { withCredentials: true });
+        
+        if (response.status === 200) {
+          // Filter out the deleted booking from the bookings state
+          setBookings(bookings.filter((booking) => booking.id !== id));
+          alert(`Reservation with ID ${id} deleted successfully.`);
+        } else {
+          alert(`Failed to delete the reservation. Please try again.`);
+        }
+        
       } catch (error) {
         console.error('Error deleting reservation', error);
+        alert('Error deleting the reservation. Please check the console for more details.');
       }
     }
   };
+  
 
   const currentDate = new Date();
 
