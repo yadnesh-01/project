@@ -42,14 +42,14 @@ const UsignIn = () => {
         <div className="flex justify-center">
           <div className="w-full max-w-md">
             <div className="shadow-lg rounded-lg">
-              <div className=" p-4 rounded-t-lg bg-[url('https://cmkt-image-prd.freetls.fastly.net/0.1.0/ps/106396/910/606/m2/fpnw/wm1/keih4mm9pyv3kpq8scymlnub2aecxzs9iscdane82nvbmfcc3leqqh7pjk0adoki-.jpg?1399222056&s=d4d7e3d9d10ef5cb29365912c8c531b2')] ">
+              <div className=" p-4 rounded-t-lg bg-[url('https://cmkt-image-prd.freetls.fastly.net/0.1.0/ps/106396/910/606/m2/fpnw/wm1/keih4mm9pyv3kpq8scymlnub2aecxzs9iscdane82nvbmfcc3leqqh7pjk0adoki-.jpg?1399222056&s=d4d7e3d9d10ef5cb29365912c8c531b2')] bg-opacity-35">
                 <h4 className="text-lg font-bold text-center">Registration Form</h4>
               </div>
-              <div className="p-6 rounded-b-lg bg-[url('https://cmkt-image-prd.freetls.fastly.net/0.1.0/ps/106396/910/606/m2/fpnw/wm1/keih4mm9pyv3kpq8scymlnub2aecxzs9iscdane82nvbmfcc3leqqh7pjk0adoki-.jpg?1399222056&s=d4d7e3d9d10ef5cb29365912c8c531b2')] bg-cover bg-center">
+              <div className="p-6 rounded-b-lg bg-[url('https://img.freepik.com/premium-photo/restaurant-blurred-background-generative-ai_538159-9164.jpg')] bg-center bg-cover ">
                 <form onSubmit={handleSubmit}>
                   {/* Your form fields */}
                   <div className="mb-4">
-                    <label htmlFor="username" className="block text-sm font-medium text-gray-700">
+                    <label htmlFor="username" className="block text-base font-bold text-gray-100 ">
                       Name
                     </label>
                     <input
@@ -64,7 +64,7 @@ const UsignIn = () => {
                   </div>
 
                   <div className="mb-4">
-                    <label htmlFor="cont" className="block text-sm font-medium text-gray-700">
+                    <label htmlFor="cont" className="block text-base font-bold text-gray-100">
                       Phone Number
                     </label>
                     <input
@@ -79,7 +79,7 @@ const UsignIn = () => {
                   </div>
 
                   <div className="mb-4">
-                    <label htmlFor="uname" className="block text-sm font-medium text-gray-700">
+                    <label htmlFor="uname" className="block text-base font-bold text-gray-100">
                       User-ID
                     </label>
                     <input
@@ -94,7 +94,7 @@ const UsignIn = () => {
                   </div>
 
                   <div className="mb-4">
-                    <label htmlFor="email" className="block text-sm font-medium text-gray-700">
+                    <label htmlFor="email" className="block text-base font-bold text-gray-100">
                       Email ID
                     </label>
                     <input
@@ -109,7 +109,7 @@ const UsignIn = () => {
                   </div>
 
                   <div className="mb-4">
-                    <label htmlFor="upass" className="block text-sm font-medium text-gray-700">
+                    <label htmlFor="upass" className="block text-base font-bold text-gray-100">
                       Password
                     </label>
                     <input
@@ -124,7 +124,7 @@ const UsignIn = () => {
                   </div>
 
                   <div className="mb-4">
-                    <label htmlFor="confirm_password" className="block text-sm font-medium text-gray-700">
+                    <label htmlFor="confirm_password" className="block text-base font-bold text-gray-100">
                       Confirm Password
                     </label>
                     <input
@@ -147,9 +147,9 @@ const UsignIn = () => {
                     </button>
                   </div>
                 </form>
-                <p className="mt-4 text-center text-sm text-gray-600">
+                <p className="mt-4 text-center text-base text-amber-200 font-bold">
                   Already have an account?{' '}
-                  <Link className="text-indigo-600 font-semibold hover:text-indigo-500" to="../Login">
+                  <Link className="text-blue-500 font-semibold hover:text-white" to="../Login">
                     Login Here
                   </Link>
                 </p>

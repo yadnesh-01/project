@@ -54,7 +54,7 @@ const Rsignin = () => {
               <div className="p-6 rounded-b-lg bg-[url('https://cmkt-image-prd.freetls.fastly.net/0.1.0/ps/106396/910/606/m2/fpnw/wm1/keih4mm9pyv3kpq8scymlnub2aecxzs9iscdane82nvbmfcc3leqqh7pjk0adoki-.jpg?1399222056&s=d4d7e3d9d10ef5cb29365912c8c531b2')] bg-cover bg-center">
                 <form onSubmit={handleSubmit}>
                   <div className="mb-4">
-                    <label htmlFor="rname" className="block text-sm font-medium text-gray-700">
+                    <label htmlFor="rname" className="block text-base font-bold text-gray-700">
                       Restaurant Name
                     </label>
                     <input
@@ -68,7 +68,7 @@ const Rsignin = () => {
                   </div>
 
                   <div className="mb-4">
-                    <label htmlFor="radd" className="block text-sm font-medium text-gray-700">
+                    <label htmlFor="radd" className="block text-base font-bold text-gray-700">
                       Restaurant Address
                     </label>
                     <input
@@ -82,7 +82,7 @@ const Rsignin = () => {
                   </div>
 
                   <div className="mb-4">
-                    <label htmlFor="rcontact" className="block text-sm font-medium text-gray-700">
+                    <label htmlFor="rcontact" className="block text-base font-bold text-gray-700">
                       Phone Number
                     </label>
                     <input
@@ -96,7 +96,7 @@ const Rsignin = () => {
                   </div>
 
                   <div className="mb-4">
-                    <label htmlFor="ruid" className="block text-sm font-medium text-gray-700">
+                    <label htmlFor="ruid" className="block text-base font-bold text-gray-700">
                       User-ID
                     </label>
                     <input
@@ -110,7 +110,7 @@ const Rsignin = () => {
                   </div>
 
                   <div className="mb-4">
-                    <label htmlFor="email" className="block text-sm font-medium text-gray-700">
+                    <label htmlFor="email" className="block text-base font-bold text-gray-700">
                       Email ID
                     </label>
                     <input
@@ -124,7 +124,7 @@ const Rsignin = () => {
                   </div>
 
                   <div className="mb-4">
-                    <label htmlFor="rpass" className="block text-sm font-medium text-gray-700">
+                    <label htmlFor="rpass" className="block text-base font-bold text-gray-700">
                       Password
                     </label>
                     <input
@@ -138,7 +138,7 @@ const Rsignin = () => {
                   </div>
 
                   <div className="mb-4">
-                    <label htmlFor="confirm_password" className="block text-sm font-medium text-gray-700">
+                    <label htmlFor="confirm_password" className="block text-base font-bold text-gray-700">
                       Confirm Password
                     </label>
                     <input
@@ -160,10 +160,10 @@ const Rsignin = () => {
                     </button>
                   </div>
                 </form>
-                <p className="mt-4 text-center text-sm text-gray-600">
+                <p className="mt-4 text-center text-base font-bold text-gray-600">
                   Already have an account?{' '}
                   <Link 
-                  className="text-indigo-600 font-semibold hover:text-indigo-500"
+                  className="text-indigo-600 text-base font-bold hover:text-indigo-500"
                   to="../../Restaurant/Login">
                     Login Here
                   </Link>

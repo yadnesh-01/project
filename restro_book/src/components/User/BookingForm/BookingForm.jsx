@@ -86,11 +86,11 @@ const BookingForm = () => {
   return (
     <div className="container mx-auto py-10">
     <form
-      className="bg-white shadow-md rounded px-8 pt-6 pb-8 mb-4 mt-10 max-w-md mx-auto"
+      className="bg-[url('https://cdn.wallpapersafari.com/70/33/exuXCo.jpg')]  rounded-xl px-8 pt-6 pb-8 mb-4 mt-10 max-w-md mx-auto bg-cover bg-center"
       onSubmit={handleSubmit}
     >
       <div className="mb-4">
-        <label className="block text-gray-700 text-sm font-bold mb-2" htmlFor="rname">
+        <label className="block text-white text-sm font-bold mb-2" htmlFor="rname">
           Restaurant
         </label>
         <select
@@ -109,7 +109,7 @@ const BookingForm = () => {
       </div>
 
       <div className="mb-4">
-        <label className="block text-gray-700 text-sm font-bold mb-2" htmlFor="date">
+        <label className="block  text-white text-sm font-bold mb-2" htmlFor="date">
           Date
         </label>
         <input
@@ -124,7 +124,7 @@ const BookingForm = () => {
       </div>
 
       <div className="mb-4">
-        <label className="block text-gray-700 text-sm font-bold mb-2" htmlFor="time">
+        <label className="block  text-white text-sm font-bold mb-2" htmlFor="time">
           Time
         </label>
         <input
@@ -142,7 +142,7 @@ const BookingForm = () => {
       </div>
 
       <div className="mb-4">
-        <label className="block text-gray-700 text-sm font-bold mb-2" htmlFor="tab_no">
+        <label className="block text-sm  text-white font-bold mb-2" htmlFor="tab_no">
           Table Number
         </label>
         <select
