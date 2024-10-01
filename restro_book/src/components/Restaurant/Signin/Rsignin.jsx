@@ -1,8 +1,8 @@
+// src/componenets/Restaurant/login/Rlogin.jsx
+
 import React, { useState } from 'react';
 import {useNavigate ,Link } from 'react-router-dom';
 import axios from 'axios';
-
-
 
 const Rsignin = () => {
   const [formData, setFormData] = useState({

@@ -1,4 +1,4 @@
-// src/components/Dashboard.jsx
+// src/components/user/Dashboard/Dashboard.jsx
 
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';

@@ -22,7 +22,7 @@ const Hnavbar = ({ isAuthenticated, userType, handleLogout, setUserType }) => {
 
           {/* Hamburger Menu Button for Small Screens */}
           <button
-            className="block md:hidden text-gray-100 hover:text-gray-200 focus:outline-none"
+            className="block md:hidden text-gray-700 hover:text-gray-700 focus:outline-none"
             onClick={toggleMenu}
           >
             <svg

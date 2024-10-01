@@ -1,3 +1,5 @@
+// src/componenets/user/Login/Ulogin.jsx
+
 import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 
@@ -101,9 +103,9 @@ export default function UlogIn({ setIsAuthenticated }) {
                   </div>
                 </form>
 
-                <p className="mt-10 text-center text-sm text-teal-100">
+                <p className="mt-10 text-center text-base text-teal-100 py-6">
                   Not a member?{' '}
-                  <a href="/Signin" className="font-semibold leading-6 text-indigo-200 hover:text-indigo-200">
+                  <a href="/Signin" className="font-semibold leading-6 text-indigo-200 hover:text-indigo-400">
                     Create New Account
                   </a>
                 </p>

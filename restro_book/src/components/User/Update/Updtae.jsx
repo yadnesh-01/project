@@ -1,10 +1,10 @@
-// src/componenets/user/Booking/FormBookingForm.jsx
+// src/components/User/Update/Update.jsx
 
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
 
-const BookingForm = () => {
+const Update = () => {
   const [formData, setFormData] = useState({
     rname: '',
     date: '',
@@ -203,4 +203,4 @@ const BookingForm = () => {
 );
 };
 
-export default BookingForm;
+export default Update;

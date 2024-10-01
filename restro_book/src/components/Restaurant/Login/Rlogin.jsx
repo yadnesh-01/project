@@ -1,3 +1,5 @@
+// src/componenets/Restaurant/Login/Rlogin.jsx
+
 import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 
@@ -84,9 +86,9 @@ export default function UlogIn({ setIsAuthenticated }) {
                   </div>
                 </form>
 
-                <p className="mt-10 text-center text-sm text-teal-100">
+                <p className="mt-10 text-center text-base font-bold text-teal-100 pb-8">
                   Not a member?{' '}
-                  <a href="/Restaurant/Sigin" className="font-semibold leading-6 text-indigo-200 hover:text-indigo-200">
+                  <a href="/Restaurant/Sigin" className="font-semibold leading-6 text-white hover:text-indigo-200">
                     Create New Account
                   </a>
                 </p>
